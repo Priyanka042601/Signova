@@ -1,12 +1,19 @@
 import json
 from datetime import datetime, date, timedelta
+from typing import Optional
 from sqlalchemy.orm import Session
 from app.models import (
     User, UserProgress, Level, Unit, Lesson, Exercise,
     SignVocabulary, VocabularyProgress, Achievement, UserAchievement, DailyActivity
 )
 
-def seed_database(db: Session):
+def seed_database(db: Optional[Session] = None):
+    if db is None:
+        from app.database import engine, Base
+        Base.metadata.create_all(bind=engine)
+        with Session(engine) as session:
+            return seed_database(session)
+
     # Check if already seeded
     if db.query(Level).first():
         return
