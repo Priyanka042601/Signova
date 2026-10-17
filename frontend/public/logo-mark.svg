@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="signova-grad" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4338CA" />
+      <stop offset="60%" stop-color="#BE185D" />
+      <stop offset="100%" stop-color="#FB7185" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded Base Badge -->
+  <rect width="100" height="100" rx="26" fill="#4338CA" />
+  <!-- Overlapping Geometric Interlocking Waves representing 2 Hands Greeting/Connecting -->
+  <path d="M28 62C28 48 38 38 52 38C66 38 72 48 72 62" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="50" cy="28" r="8" fill="#FBBF24" />
+  <path d="M38 70C42 75 48 78 54 78C64 78 70 70 70 65" stroke="#FB7185" stroke-width="6" stroke-linecap="round"/>
+  <!-- Sparkle / Connection node -->
+  <circle cx="68" cy="38" r="4.5" fill="#FFFFFF" />
+  <circle cx="32" cy="42" r="3.5" fill="#FB7185" />
+</svg>

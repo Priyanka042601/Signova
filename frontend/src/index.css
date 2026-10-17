@@ -1,0 +1,183 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --color-primary: #4338CA;
+  --color-berry: #BE185D;
+  --color-coral: #FB7185;
+  --color-navy: #1E293B;
+  --color-bg: #F8FAFC;
+  --color-softrose: #FFF1F2;
+  --color-surface: #FFFFFF;
+  --color-yellow: #FBBF24;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 3D Duolingo-style Pop Buttons with Micro-interactions */
+.btn-pop-indigo {
+  background-color: #4338CA;
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 0 #312E81;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-pop-indigo:hover {
+  background-color: #4F46E5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 #312E81;
+}
+.btn-pop-indigo:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 #312E81;
+}
+
+.btn-pop-berry {
+  background-color: #BE185D;
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 0 #831843;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-pop-berry:hover {
+  background-color: #DB2777;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 #831843;
+}
+.btn-pop-berry:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 #831843;
+}
+
+.btn-pop-yellow {
+  background-color: #FBBF24;
+  color: #78350F;
+  box-shadow: 0 4px 0 0 #B45309;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-pop-yellow:hover {
+  background-color: #FCD34D;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 #B45309;
+}
+.btn-pop-yellow:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 #B45309;
+}
+
+.btn-pop-outline {
+  background-color: #FFFFFF;
+  color: #4338CA;
+  border: 2px solid #E2E8F0;
+  box-shadow: 0 4px 0 0 #CBD5E1;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-pop-outline:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 #CBD5E1;
+}
+.btn-pop-outline:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 #CBD5E1;
+}
+
+/* Subtle Interactive Card Lift */
+.card-interactive {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(67, 56, 202, 0.08), 0 8px 10px -6px rgba(67, 56, 202, 0.04);
+}
+
+/* Shimmer Loading Skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.6) 25%,
+    rgba(241, 245, 249, 0.9) 37%,
+    rgba(226, 232, 240, 0.6) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth Entrance Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Stagger animation utilities */
+.stagger-1 { animation-delay: 40ms; }
+.stagger-2 { animation-delay: 80ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 160ms; }
+.stagger-5 { animation-delay: 200ms; }
+.stagger-6 { animation-delay: 240ms; }
+
+/* Micro Badge Soft Pulse */
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.9; }
+}
+.animate-soft-pulse {
+  animation: softPulse 2.5s ease-in-out infinite;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton-shimmer {
+    animation: none !important;
+    background: #E2E8F0 !important;
+  }
+}
