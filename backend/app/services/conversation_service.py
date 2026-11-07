@@ -2,6 +2,7 @@ from typing import List, Dict, Any, Optional
 from datetime import date, datetime
 from sqlalchemy.orm import Session
 from app.models import UserProgress, DailyActivity, Achievement, UserAchievement
+from app.services.streak_service import record_activity_and_update_streak
 
 CONVERSATION_SCENARIOS = [
     {
@@ -132,41 +133,14 @@ def get_conversation_scenarios() -> List[Dict[str, Any]]:
     return CONVERSATION_SCENARIOS
 
 def complete_conversation_scenario(db: Session, user_id: int, scenario_id: str) -> Dict[str, Any]:
-    """Awards XP, records daily activity, and evaluates achievements for completing a scenario."""
-    # Find or initialize user progress
-    user_prog = db.query(UserProgress).filter(UserProgress.user_id == user_id).first()
-    if not user_prog:
-        user_prog = UserProgress(
-            user_id=user_id,
-            xp_total=0,
-            current_streak=1,
-            longest_streak=1,
-            last_activity_date=date.today()
-        )
-        db.add(user_prog)
-    
-    user_prog.xp_total += 30
-
-    # Daily activity tracking
-    today = date.today()
-    daily_act = db.query(DailyActivity).filter(
-        DailyActivity.user_id == user_id,
-        DailyActivity.activity_date == today
-    ).first()
-
-    if daily_act:
-        daily_act.qualifying_activity_count += 1
-        daily_act.minutes_spent += 5
-        daily_act.xp_earned += 30
-    else:
-        daily_act = DailyActivity(
-            user_id=user_id,
-            activity_date=today,
-            qualifying_activity_count=1,
-            minutes_spent=5,
-            xp_earned=30
-        )
-        db.add(daily_act)
+    """Awards XP, records daily activity, maintains streak, and evaluates achievements for completing a scenario."""
+    activity_result = record_activity_and_update_streak(
+        db=db,
+        user_id=user_id,
+        xp_earned=30,
+        minutes_spent=5
+    )
+    user_prog = activity_result["user_prog"]
 
     # Check "conversation_done" achievement
     ach = db.query(Achievement).filter(Achievement.condition_type == "conversation_done").first()
@@ -184,14 +158,14 @@ def complete_conversation_scenario(db: Session, user_id: int, scenario_id: str) 
             ))
             user_prog.xp_total += ach.xp_reward
             unlocked_achievement = ach.name
-
-    db.commit()
+            db.commit()
 
     return {
         "status": "success",
         "scenario_id": scenario_id,
         "xp_awarded": 30,
         "new_xp_total": user_prog.xp_total,
+        "current_streak": activity_result["current_streak"],
         "unlocked_achievement": unlocked_achievement,
         "message": "Scenario completed successfully!"
     }

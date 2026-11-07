@@ -5,13 +5,21 @@ from app.models import (
     User, UserProgress, UserAchievement, Achievement, LessonAttempt,
     Lesson, Unit, Level, DailyActivity, SignVocabulary, VocabularyProgress, Favourite
 )
+from app.services.streak_service import evaluate_and_sync_streak
 
 def get_user_profile(db: Session, user_id: int) -> Dict[str, Any]:
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise ValueError(f"User {user_id} not found")
 
-    prog = user.progress or UserProgress(user_id=user_id, xp_total=0, current_streak=0, longest_streak=0)
+    if not user.progress:
+        prog = UserProgress(user_id=user_id, xp_total=0, current_streak=0, longest_streak=0, last_activity_date=None)
+        db.add(prog)
+        db.commit()
+        db.refresh(user)
+    else:
+        prog = user.progress
+        evaluate_and_sync_streak(db, prog)
 
     # Calculate real completed lessons count
     completed_lesson_ids = set(

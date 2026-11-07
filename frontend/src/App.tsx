@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ClerkAuthProvider } from './auth/ClerkAuthProvider';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { AppLayout } from './layouts/AppLayout';
 import { DashboardPage } from './pages/DashboardPage';
 import { LearnCurriculumPage } from './pages/LearnCurriculumPage';
@@ -21,8 +22,9 @@ import { NotFoundPage } from './pages/NotFoundPage';
 export const App: React.FC = () => {
   return (
     <ClerkAuthProvider>
-      <ToastProvider>
-        <BrowserRouter>
+      <ThemeProvider>
+        <ToastProvider>
+          <BrowserRouter>
           <Routes>
             {/* Standalone Authentication Routes */}
             <Route path="/sign-in/*" element={<SignInPage />} />
@@ -114,7 +116,8 @@ export const App: React.FC = () => {
           </Routes>
         </BrowserRouter>
       </ToastProvider>
-    </ClerkAuthProvider>
+    </ThemeProvider>
+  </ClerkAuthProvider>
   );
 };
 

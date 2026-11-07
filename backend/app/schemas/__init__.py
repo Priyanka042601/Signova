@@ -210,6 +210,8 @@ class RevisionAttemptResponse(BaseModel):
     new_mastery_score: float
     next_review_at: datetime
     xp_awarded: int
+    new_xp_total: Optional[int] = None
+    current_streak: Optional[int] = None
 
 # Practice
 class PracticeQuestion(BaseModel):
@@ -238,6 +240,7 @@ class PracticeAttemptResponse(BaseModel):
     accuracy_percent: float
     xp_awarded: int
     new_xp_total: int
+    current_streak: Optional[int] = None
     recommendation: str
 
 # Gamification & User

@@ -6,6 +6,8 @@ import { VerificationBadge } from '../components/VerificationBadge';
 import { SignDemonstration } from '../components/SignDemonstration';
 import { Sidebar } from '../components/Sidebar';
 import { Header } from '../components/Header';
+import { ThemeProvider } from '../context/ThemeContext';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { SignVocabulary } from '../types/api';
 
 vi.mock('@clerk/clerk-react', () => ({
@@ -120,14 +122,34 @@ describe('Signova Frontend Core Components', () => {
     };
 
     render(
-      <BrowserRouter>
-        <Header dashboardData={mockDashboard} />
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Header dashboardData={mockDashboard} />
+        </BrowserRouter>
+      </ThemeProvider>
     );
 
     expect(screen.getByText('5')).toBeDefined();
     expect(screen.getByText('240')).toBeDefined();
     expect(screen.getByText('Indian Sign Language (ISL) Edition')).toBeDefined();
+  });
+
+  it('renders ThemeToggle in compact and segmented variants without crashing', () => {
+    const { container: compactContainer } = render(
+      <ThemeProvider>
+        <ThemeToggle variant="compact" />
+      </ThemeProvider>
+    );
+    expect(compactContainer.querySelector('button')).toBeDefined();
+
+    const { getByText } = render(
+      <ThemeProvider>
+        <ThemeToggle variant="segmented" />
+      </ThemeProvider>
+    );
+    expect(getByText('Light')).toBeDefined();
+    expect(getByText('Dark')).toBeDefined();
+    expect(getByText('System')).toBeDefined();
   });
 
   it('renders SignInPage with Clerk authentication options and fallback notice', async () => {

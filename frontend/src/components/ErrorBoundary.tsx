@@ -37,27 +37,27 @@ export class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="min-h-[400px] flex items-center justify-center p-6">
-          <div className="max-w-md w-full bg-white rounded-3xl border border-rose-200/80 p-8 shadow-card text-center space-y-5 animate-fade-in">
-            <div className="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
+          <div className="max-w-md w-full bg-white dark:bg-[#131C31] rounded-3xl border border-rose-200/80 dark:border-rose-900/60 p-8 shadow-card dark:shadow-card-dark text-center space-y-5 animate-fade-in">
+            <div className="w-14 h-14 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center mx-auto">
               <AlertTriangle className="w-7 h-7" />
             </div>
 
             <div>
-              <h3 className="text-xl font-black text-navy-brand">Something went wrong</h3>
-              <p className="text-sm text-slate-600 mt-2">
+              <h3 className="text-xl font-black text-navy-brand dark:text-white">Something went wrong</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
                 Signova encountered an unexpected problem loading this component. Your learning progress is safe.
               </p>
             </div>
 
             {this.state.error && (
-              <div className="p-3 bg-slate-50 rounded-xl text-left font-mono text-xs text-slate-700 overflow-x-auto max-h-28 border border-slate-200">
+              <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl text-left font-mono text-xs text-slate-700 dark:text-slate-300 overflow-x-auto max-h-28 border border-slate-200 dark:border-slate-800">
                 {this.state.error.message}
               </div>
             )}
 
             <button
               onClick={this.handleReset}
-              className="btn-pop-indigo w-full py-3 rounded-2xl font-bold flex items-center justify-center gap-2"
+              className="btn-pop-blue w-full py-3 rounded-2xl font-bold flex items-center justify-center gap-2 cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Reload Application</span>

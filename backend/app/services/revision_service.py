@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Any
 from sqlalchemy.orm import Session
 from app.models import VocabularyProgress, SignVocabulary, UserProgress, UserAchievement, Achievement
+from app.services.streak_service import record_activity_and_update_streak
 
 def get_due_revision_items(db: Session, user_id: int) -> List[Dict[str, Any]]:
     now = datetime.utcnow()
@@ -82,11 +83,15 @@ def record_revision_attempt(db: Session, user_id: int, vocabulary_id: int, is_co
             prog.mastery_score = max(0.0, prog.mastery_score - 15.0)
             prog.next_review_at = now + timedelta(days=1)
 
-    # Award 10 XP per revision
+    # Award XP and update streak via centralized engine
     xp_awarded = 10 if is_correct else 3
-    user_prog = db.query(UserProgress).filter(UserProgress.user_id == user_id).first()
-    if user_prog:
-        user_prog.xp_total += xp_awarded
+    activity_result = record_activity_and_update_streak(
+        db=db,
+        user_id=user_id,
+        xp_earned=xp_awarded,
+        minutes_spent=1
+    )
+    user_prog = activity_result["user_prog"]
 
     # Check "Revision Hero" achievement
     total_revisions = db.query(VocabularyProgress).filter(VocabularyProgress.user_id == user_id).count()
@@ -109,5 +114,7 @@ def record_revision_attempt(db: Session, user_id: int, vocabulary_id: int, is_co
         "new_interval_days": prog.review_interval_days,
         "new_mastery_score": round(prog.mastery_score, 1),
         "next_review_at": prog.next_review_at,
-        "xp_awarded": xp_awarded
+        "xp_awarded": xp_awarded,
+        "new_xp_total": user_prog.xp_total if user_prog else xp_awarded,
+        "current_streak": activity_result["current_streak"]
     }

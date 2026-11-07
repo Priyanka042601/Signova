@@ -10,7 +10,6 @@ import {
   MessageSquare,
   Settings,
   Sparkles,
-  Camera
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -26,17 +25,17 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-white border-r border-slate-200/80 px-4 py-6 select-none z-30 flex-shrink-0">
+    <aside className="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-white dark:bg-[#0F172A]/90 border-r border-slate-200/80 dark:border-slate-800/80 px-4 py-6 select-none z-30 flex-shrink-0 transition-colors duration-150">
       {/* Brand Logo & Wordmark */}
       <NavLink to="/" className="flex items-center gap-3 px-3 mb-8 group">
-        <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-brand via-berry-brand to-coral-brand flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+        <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-700 via-blue-600 to-cyan-400 flex items-center justify-center shadow-md shadow-blue-500/25 group-hover:scale-105 transition-transform">
           <img src="/logo-mark.svg" alt="Signova Logo" className="w-9 h-9" />
         </div>
         <div>
-          <span className="text-2xl font-black tracking-tight text-navy-brand block leading-none">
-            Sign<span className="text-berry-brand">ova</span>
+          <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white block leading-none">
+            Sign<span className="text-blue-600 dark:text-blue-400">ova</span>
           </span>
-          <span className="text-[11px] font-medium text-navy-muted tracking-wide block mt-1">
+          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 tracking-wide block mt-1">
             A New Way to Connect
           </span>
         </div>
@@ -53,8 +52,8 @@ export const Sidebar: React.FC = () => {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3.5 py-3 rounded-2xl text-sm font-semibold transition-all duration-150 ${
                   isActive
-                    ? 'bg-indigo-50 text-indigo-brand shadow-sm font-bold border border-indigo-100'
-                    : 'text-slate-600 hover:text-navy-brand hover:bg-slate-50'
+                    ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold border border-blue-200/80 dark:border-blue-800/70 shadow-sm shadow-blue-500/5'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/70 dark:hover:bg-slate-800/60'
                 }`
               }
             >
@@ -62,17 +61,17 @@ export const Sidebar: React.FC = () => {
                 <>
                   <Icon
                     className={`w-5 h-5 flex-shrink-0 ${
-                      isActive ? 'text-indigo-brand stroke-[2.5]' : 'text-slate-400 group-hover:text-slate-600'
+                      isActive ? 'text-blue-600 dark:text-blue-400 stroke-[2.5]' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300'
                     }`}
                   />
                   <span>{item.label}</span>
                   {item.path === '/revision' && (
-                    <span className="ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full bg-berry-50 text-berry-700 border border-berry-100">
+                    <span className="ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                       SRS
                     </span>
                   )}
                   {item.path === '/practice' && (
-                    <span className="ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-50 text-amber-700 border border-amber-100">
+                    <span className="ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                       AI
                     </span>
                   )}
@@ -84,14 +83,14 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* ISL Heritage & Mission Callout */}
-      <div className="mt-auto p-3.5 bg-softrose/70 border border-coral-200/70 rounded-2xl">
+      <div className="mt-auto p-3.5 bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200/70 dark:border-blue-900/60 rounded-2xl transition-colors">
         <div className="flex items-center gap-2 mb-1.5">
-          <Sparkles className="w-4 h-4 text-berry-brand flex-shrink-0" />
-          <span className="text-xs font-bold text-berry-brand uppercase tracking-wider">
+          <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+          <span className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wider">
             Authentic ISL
           </span>
         </div>
-        <p className="text-[11px] text-navy-muted leading-relaxed">
+        <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
           Teaching real Indian Sign Language with verified educators and Deaf community guidance.
         </p>
       </div>

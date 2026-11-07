@@ -14,6 +14,8 @@ def fetch_clerk_user_profile(clerk_id: str) -> Optional[dict]:
     """Fetch user profile metadata directly from Clerk API using secret key."""
     if not settings.CLERK_SECRET_KEY or not clerk_id:
         return None
+    if clerk_id.startswith("test_") or clerk_id.startswith("user_clerk_test") or settings.ENVIRONMENT == "test":
+        return None
     try:
         url = f"https://api.clerk.com/v1/users/{clerk_id}"
         req = urllib.request.Request(
@@ -138,8 +140,6 @@ def sync_clerk_user(
             db.commit()
             db.refresh(user)
 
-        # Ensure user progress is preserved
-        migrate_guest_progress_to_user(db, user)
         return user
 
     # Create new learner
@@ -157,30 +157,17 @@ def sync_clerk_user(
     db.commit()
     db.refresh(user)
 
-    # Attach progress
+    # Attach fresh progress with 0 streak and 0 XP for genuine learner journey
     prog = UserProgress(
         user_id=user.id,
         xp_total=0,
-        current_streak=1,
-        longest_streak=1,
-        last_activity_date=date.today()
+        current_streak=0,
+        longest_streak=0,
+        last_activity_date=None
     )
     db.add(prog)
-
-    # Attach daily activity
-    act = DailyActivity(
-        user_id=user.id,
-        activity_date=date.today(),
-        qualifying_activity_count=0,
-        minutes_spent=0,
-        xp_earned=0
-    )
-    db.add(act)
     db.commit()
     db.refresh(user)
-
-    # Preserve any pre-login progress
-    migrate_guest_progress_to_user(db, user)
 
     return user
 

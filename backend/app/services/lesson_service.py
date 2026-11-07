@@ -6,6 +6,7 @@ from app.models import (
     DailyActivity, Achievement, UserAchievement, VocabularyProgress
 )
 from app.schemas import AnswerSubmission
+from app.services.streak_service import record_activity_and_update_streak
 
 def evaluate_lesson_attempt(
     db: Session,
@@ -91,54 +92,15 @@ def evaluate_lesson_attempt(
     )
     db.add(attempt)
 
-    # Update User Progress & Streaks
-    user_prog = db.query(UserProgress).filter(UserProgress.user_id == user_id).first()
-    if not user_prog:
-        user_prog = UserProgress(user_id=user_id, xp_total=0, current_streak=0, longest_streak=0)
-        db.add(user_prog)
-
-    user_prog.xp_total += xp_awarded
-
-    # Update Streak logic with real calendar dates
-    today = date.today()
-    if user_prog.last_activity_date != today:
-        if user_prog.last_activity_date == today - timedelta(days=1):
-            # Consecutive day!
-            user_prog.current_streak += 1
-        elif user_prog.last_activity_date is None or user_prog.last_activity_date < today - timedelta(days=1):
-            # Broken streak or first day
-            user_prog.current_streak = 1
-
-        if user_prog.current_streak > user_prog.longest_streak:
-            user_prog.longest_streak = user_prog.current_streak
-
-        user_prog.last_activity_date = today
-
-    # Update or add DailyActivity
-    daily_act = db.query(DailyActivity).filter(
-        DailyActivity.user_id == user_id,
-        DailyActivity.activity_date == today
-    ).first()
-
-    minutes = max(1, time_spent_seconds // 60)
-    if daily_act:
-        daily_act.qualifying_activity_count += 1
-        daily_act.minutes_spent += minutes
-        daily_act.xp_earned += xp_awarded
-    else:
-        daily_act = DailyActivity(
-            user_id=user_id,
-            activity_date=today,
-            qualifying_activity_count=1,
-            minutes_spent=minutes,
-            xp_earned=xp_awarded
-        )
-        db.add(daily_act)
-
-    # Check for newly unlocked achievements
-    new_achievements = _check_achievements(db, user_id, user_prog)
-
-    db.commit()
+    # Update User Progress, Streaks & DailyActivity via centralized streak engine
+    activity_result = record_activity_and_update_streak(
+        db=db,
+        user_id=user_id,
+        xp_earned=xp_awarded,
+        minutes_spent=time_spent_seconds // 60
+    )
+    user_prog = activity_result["user_prog"]
+    new_achievements = activity_result["new_achievements"]
 
     return {
         "attempt_id": attempt.id,

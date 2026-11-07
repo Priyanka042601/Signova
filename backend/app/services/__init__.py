@@ -13,6 +13,9 @@ from app.services.profile_service import (
 from app.services.conversation_service import (
     get_conversation_scenarios, complete_conversation_scenario
 )
+from app.services.streak_service import (
+    calculate_current_streak, evaluate_and_sync_streak, record_activity_and_update_streak
+)
 
 __all__ = [
     "get_user_by_id",
@@ -38,5 +41,8 @@ __all__ = [
     "get_dashboard_summary",
     "reset_user_progress",
     "get_conversation_scenarios",
-    "complete_conversation_scenario"
+    "complete_conversation_scenario",
+    "calculate_current_streak",
+    "evaluate_and_sync_streak",
+    "record_activity_and_update_streak"
 ]

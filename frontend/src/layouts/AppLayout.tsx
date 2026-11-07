@@ -31,7 +31,7 @@ export const AppLayout: React.FC = () => {
   }, [fetchStats, userId, isSignedIn]);
 
   return (
-    <div className="min-h-screen bg-cloud flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-cloud dark:bg-[#0B0F19] text-navy-brand dark:text-slate-100 flex flex-col md:flex-row font-sans transition-colors duration-200">
       {/* Desktop Left Sidebar */}
       <Sidebar />
 

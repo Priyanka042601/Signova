@@ -56,31 +56,31 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               key={toast.id}
               className={`pointer-events-auto p-4 rounded-2xl shadow-xl border backdrop-blur-md transition-all duration-300 transform translate-y-0 opacity-100 flex items-start gap-3.5 ${
                 isXp
-                  ? 'bg-amber-50/95 border-amber-200 text-amber-900 shadow-amber-500/10'
+                  ? 'bg-amber-50/95 dark:bg-amber-950/90 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 shadow-amber-500/10'
                   : isSuccess
-                  ? 'bg-emerald-50/95 border-emerald-200 text-emerald-900 shadow-emerald-500/10'
+                  ? 'bg-emerald-50/95 dark:bg-emerald-950/90 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 shadow-emerald-500/10'
                   : isWarning
-                  ? 'bg-rose-50/95 border-rose-200 text-rose-900 shadow-rose-500/10'
-                  : 'bg-white/95 border-slate-200 text-navy-brand shadow-indigo-500/10'
+                  ? 'bg-rose-50/95 dark:bg-rose-950/90 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200 shadow-rose-500/10'
+                  : 'bg-white/95 dark:bg-slate-900/95 border-slate-200 dark:border-slate-800 text-navy-brand dark:text-slate-100 shadow-blue-500/10'
               }`}
             >
               <div className="flex-shrink-0 mt-0.5">
                 {isXp && <Sparkles className="w-5 h-5 text-amber-500 fill-amber-400" />}
-                {isSuccess && <CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-                {isWarning && <AlertCircle className="w-5 h-5 text-rose-600" />}
-                {!isXp && !isSuccess && !isWarning && <Info className="w-5 h-5 text-indigo-600" />}
+                {isSuccess && <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />}
+                {isWarning && <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400" />}
+                {!isXp && !isSuccess && !isWarning && <Info className="w-5 h-5 text-blue-600 dark:text-blue-400" />}
               </div>
 
               <div className="flex-1 min-w-0 pr-2">
                 <h4 className="text-sm font-bold leading-tight">{toast.title}</h4>
                 {toast.message && (
-                  <p className="text-xs mt-1 text-slate-600 font-medium leading-relaxed">{toast.message}</p>
+                  <p className="text-xs mt-1 text-slate-600 dark:text-slate-300 font-medium leading-relaxed">{toast.message}</p>
                 )}
               </div>
 
               <button
                 onClick={() => removeToast(toast.id)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100 transition-colors"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="Close notification"
               >
                 <X className="w-3.5 h-3.5" />

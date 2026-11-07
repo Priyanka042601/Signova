@@ -3,6 +3,7 @@ from typing import List, Dict, Any
 from sqlalchemy.orm import Session
 from app.models import SignVocabulary, VocabularyProgress, UserProgress, DailyActivity
 from datetime import date
+from app.services.streak_service import record_activity_and_update_streak
 
 def generate_practice_session(db: Session, user_id: int, mode: str, count: int = 5) -> List[Dict[str, Any]]:
     # Filter only verified signs for practice as required by the prompt
@@ -69,31 +70,13 @@ def record_practice_attempt(
     accuracy_percent = (correct_answers / total_questions * 100.0) if total_questions > 0 else 0.0
     xp_awarded = correct_answers * 4 + (10 if accuracy_percent >= 80.0 else 0)
 
-    user_prog = db.query(UserProgress).filter(UserProgress.user_id == user_id).first()
-    if user_prog:
-        user_prog.xp_total += xp_awarded
-
-    # Update DailyActivity
-    today = date.today()
-    daily_act = db.query(DailyActivity).filter(
-        DailyActivity.user_id == user_id,
-        DailyActivity.activity_date == today
-    ).first()
-
-    minutes = max(1, time_spent_seconds // 60)
-    if daily_act:
-        daily_act.qualifying_activity_count += 1
-        daily_act.minutes_spent += minutes
-        daily_act.xp_earned += xp_awarded
-    else:
-        daily_act = DailyActivity(
-            user_id=user_id,
-            activity_date=today,
-            qualifying_activity_count=1,
-            minutes_spent=minutes,
-            xp_earned=xp_awarded
-        )
-        db.add(daily_act)
+    # Update User Progress, Streaks & DailyActivity via centralized streak engine
+    activity_result = record_activity_and_update_streak(
+        db=db,
+        user_id=user_id,
+        xp_earned=xp_awarded,
+        minutes_spent=time_spent_seconds // 60
+    )
 
     # Recommendations based on performance
     if accuracy_percent >= 90:
@@ -103,13 +86,12 @@ def record_practice_attempt(
     else:
         recommendation = "Keep going! We recommend visiting the ISL Dictionary to review handshape and non-manual cues before attempting again."
 
-    db.commit()
-
     return {
         "score": correct_answers,
         "total_questions": total_questions,
         "accuracy_percent": round(accuracy_percent, 1),
         "xp_awarded": xp_awarded,
-        "new_xp_total": user_prog.xp_total if user_prog else xp_awarded,
+        "new_xp_total": activity_result["new_xp_total"],
+        "current_streak": activity_result["current_streak"],
         "recommendation": recommendation
     }

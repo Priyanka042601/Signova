@@ -2,10 +2,12 @@ from sqlalchemy.orm import Session
 from app.models import User
 from app.schemas import UserAuthResponse, UserSyncRequest
 from app.services.user_service import sync_clerk_user
+from app.services.streak_service import calculate_current_streak
 
 def get_current_user_profile(current_user: User) -> UserAuthResponse:
     """Controller to return authenticated user profile and session identity."""
     progress = current_user.progress
+    streak = calculate_current_streak(progress.last_activity_date, progress.current_streak) if progress else 0
     return UserAuthResponse(
         id=current_user.id,
         clerk_id=current_user.clerk_id,
@@ -14,7 +16,7 @@ def get_current_user_profile(current_user: User) -> UserAuthResponse:
         avatar=current_user.avatar,
         role=current_user.role or "learner",
         xp_total=progress.xp_total if progress else 0,
-        current_streak=progress.current_streak if progress else 0,
+        current_streak=streak,
         longest_streak=progress.longest_streak if progress else 0
     )
 

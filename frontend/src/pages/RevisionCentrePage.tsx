@@ -94,73 +94,73 @@ export const RevisionCentrePage: React.FC = () => {
     <div className="space-y-8 animate-fade-in max-w-3xl mx-auto">
       {/* Header */}
       <div>
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-berry-50 border border-berry-100 text-xs font-semibold text-berry-brand mb-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2">
           <Repeat className="w-3.5 h-3.5" />
           <span>Spaced Repetition System (SRS)</span>
         </div>
-        <h1 className="text-3xl font-extrabold text-navy-brand tracking-tight">
+        <h1 className="text-3xl font-extrabold text-navy-brand dark:text-white tracking-tight">
           Revision Centre
         </h1>
-        <p className="text-sm text-navy-muted mt-1 max-w-xl">
+        <p className="text-sm text-navy-muted dark:text-slate-400 mt-1 max-w-xl">
           Scientific spaced repetition schedules reviews right before your brain forgets. Correct reviews double the interval; tricky items return sooner.
         </p>
       </div>
 
       {/* Main Revision Arena */}
       {sessionCompleted ? (
-        <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card text-center space-y-4">
-          <div className="w-16 h-16 mx-auto rounded-3xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+        <div className="bg-white dark:bg-[#131C31] rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark text-center space-y-4">
+          <div className="w-16 h-16 mx-auto rounded-3xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h2 className="text-2xl font-black text-navy-brand">Revision Session Complete!</h2>
-          <p className="text-xs text-navy-muted max-w-md mx-auto leading-relaxed">
+          <h2 className="text-2xl font-black text-navy-brand dark:text-white">Revision Session Complete!</h2>
+          <p className="text-xs text-navy-muted dark:text-slate-400 max-w-md mx-auto leading-relaxed">
             All due vocabulary items have been reviewed and their memory intervals updated.
           </p>
 
           <div className="pt-2 flex justify-center gap-3">
             <NavLink
               to="/learn"
-              className="px-6 py-3 rounded-2xl btn-pop-indigo text-xs font-bold"
+              className="px-6 py-3 rounded-2xl btn-pop-blue text-xs font-bold"
             >
               Continue Curriculum
             </NavLink>
             <button
               onClick={fetchDueItems}
-              className="px-6 py-3 rounded-2xl btn-pop-outline text-xs font-bold"
+              className="px-6 py-3 rounded-2xl btn-pop-outline text-xs font-bold cursor-pointer"
             >
               Check for Due Signs
             </button>
           </div>
         </div>
       ) : dueItems.length === 0 ? (
-        <div className="bg-white rounded-3xl p-10 border border-slate-200/80 shadow-card text-center space-y-3">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-indigo-50 text-indigo-brand flex items-center justify-center">
+        <div className="bg-white dark:bg-[#131C31] rounded-3xl p-10 border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark text-center space-y-3">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
             <Sparkles className="w-7 h-7" />
           </div>
-          <h3 className="text-lg font-bold text-navy-brand">No Signs Due for Review!</h3>
-          <p className="text-xs text-navy-muted max-w-sm mx-auto leading-relaxed">
+          <h3 className="text-lg font-bold text-navy-brand dark:text-white">No Signs Due for Review!</h3>
+          <p className="text-xs text-navy-muted dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
             You're all caught up on your spaced repetition schedule. Complete more curriculum lessons to add new vocabulary to your revision queue!
           </p>
           <NavLink
             to="/learn"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl btn-pop-indigo text-xs font-bold"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl btn-pop-blue text-xs font-bold"
           >
             <span>Learn New Signs</span>
             <ArrowRight className="w-4 h-4" />
           </NavLink>
         </div>
       ) : currentItem ? (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card space-y-6">
+        <div className="bg-white dark:bg-[#131C31] rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark space-y-6">
           {/* Item Meta Bar */}
-          <div className="flex items-center justify-between text-xs text-navy-muted">
-            <span className="font-extrabold text-berry-brand uppercase tracking-wider">
+          <div className="flex items-center justify-between text-xs text-navy-muted dark:text-slate-400">
+            <span className="font-extrabold text-berry-brand dark:text-sky-400 uppercase tracking-wider">
               Item {currentIndex + 1} of {dueItems.length}
             </span>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-bold">
+              <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold">
                 Mastery: {Math.round(currentItem.mastery_score)}%
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-bold">
+              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold">
                 Interval: {currentItem.review_interval_days}d
               </span>
             </div>
@@ -169,40 +169,40 @@ export const RevisionCentrePage: React.FC = () => {
           {/* Prompt Visual & Recall Challenge */}
           <div className="space-y-4">
             <div className="text-center py-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
                 Category: {currentItem.category}
               </span>
-              <h3 className="text-2xl font-black text-navy-brand">
+              <h3 className="text-2xl font-black text-navy-brand dark:text-white">
                 Do you remember how to sign or recognize:
               </h3>
-              <p className="text-3xl font-extrabold text-indigo-brand mt-2">
+              <p className="text-3xl font-extrabold text-indigo-brand dark:text-blue-400 mt-2">
                 "{currentItem.vocabulary}"
               </p>
             </div>
 
             {/* Answer Reveal Area */}
             {isAnswerRevealed ? (
-              <div className="space-y-4 p-5 rounded-2xl bg-slate-50 border border-slate-200 animate-fade-in">
+              <div className="space-y-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 animate-fade-in">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-indigo-900 uppercase tracking-wide">
+                  <span className="text-xs font-bold text-indigo-900 dark:text-blue-300 uppercase tracking-wide">
                     Verified ISL Demonstration
                   </span>
                   <VerificationBadge status={currentItem.verification_status} />
                 </div>
 
-                <p className="text-xs sm:text-sm text-navy-brand leading-relaxed font-medium">
+                <p className="text-xs sm:text-sm text-navy-brand dark:text-slate-200 leading-relaxed font-medium">
                   {currentItem.explanation}
                 </p>
 
                 {currentItem.handshape && (
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs text-navy-brand">
-                    <span className="font-bold text-indigo-800 block mb-0.5">Handshape:</span>
+                  <div className="p-3 bg-white dark:bg-[#131C31] rounded-xl border border-slate-200 dark:border-slate-800 text-xs text-navy-brand dark:text-slate-200">
+                    <span className="font-bold text-blue-800 dark:text-blue-400 block mb-0.5">Handshape:</span>
                     <span>{currentItem.handshape}</span>
                   </div>
                 )}
 
                 {attemptResponse && (
-                  <div className="p-3 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-between text-xs font-bold text-indigo-900">
+                  <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 flex items-center justify-between text-xs font-bold text-blue-900 dark:text-blue-200">
                     <span>Next Review Scheduled in {attemptResponse.new_interval_days} days</span>
                     <span>+{attemptResponse.xp_awarded} XP</span>
                   </div>
@@ -211,7 +211,7 @@ export const RevisionCentrePage: React.FC = () => {
                 <div className="flex justify-end pt-2">
                   <button
                     onClick={handleNext}
-                    className="px-6 py-3 rounded-2xl btn-pop-indigo text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                    className="px-6 py-3 rounded-2xl btn-pop-blue text-xs font-bold flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>{currentIndex + 1 === dueItems.length ? 'Finish Session' : 'Next Item'}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -219,28 +219,28 @@ export const RevisionCentrePage: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="space-y-3 pt-4 border-t border-slate-100">
-                <p className="text-xs text-navy-muted text-center font-medium">
+              <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <p className="text-xs text-navy-muted dark:text-slate-400 text-center font-medium">
                   Recall the handshape and movement in your mind or sign it with your hands, then rate your recall:
                 </p>
 
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => handleRecordResult(false)}
-                    className="p-4 rounded-2xl border-2 border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-rose-900 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 cursor-pointer"
+                    className="p-4 rounded-2xl border-2 border-rose-200 dark:border-rose-900/80 bg-rose-50/60 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-rose-900 dark:text-rose-200 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 cursor-pointer"
                   >
-                    <XCircle className="w-5 h-5 text-rose-600" />
+                    <XCircle className="w-5 h-5 text-rose-600 dark:text-rose-400" />
                     <span>Hard / Forgot</span>
-                    <span className="text-[10px] text-rose-700 font-normal">Review in 1 day</span>
+                    <span className="text-[10px] text-rose-700 dark:text-rose-300 font-normal">Review in 1 day</span>
                   </button>
 
                   <button
                     onClick={() => handleRecordResult(true)}
-                    className="p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100 text-emerald-900 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 cursor-pointer"
+                    className="p-4 rounded-2xl border-2 border-emerald-200 dark:border-emerald-900/80 bg-emerald-50/60 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 cursor-pointer"
                   >
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     <span>Remembered Well</span>
-                    <span className="text-[10px] text-emerald-700 font-normal">Double review interval</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-normal">Double review interval</span>
                   </button>
                 </div>
               </div>

@@ -182,26 +182,26 @@ export const PracticeCentrePage: React.FC = () => {
     <div className="space-y-8 animate-fade-in">
       {/* Top Header */}
       <div>
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-xs font-semibold text-indigo-brand mb-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2">
           <Target className="w-3.5 h-3.5" />
           <span>Practice & Fluency Centre</span>
         </div>
-        <h1 className="text-3xl font-extrabold text-navy-brand tracking-tight">
+        <h1 className="text-3xl font-extrabold text-navy-brand dark:text-white tracking-tight">
           Strengthen Your Signing
         </h1>
-        <p className="text-sm text-navy-muted mt-1 max-w-2xl">
+        <p className="text-sm text-navy-muted dark:text-slate-400 mt-1 max-w-2xl">
           Sharpen vocabulary recall, test quick recognition, or use guided camera practice to observe and refine your handshapes and facial expressions.
         </p>
       </div>
 
       {/* Main Mode Switcher */}
-      <div className="flex gap-3 border-b border-slate-200 pb-2">
+      <div className="flex gap-3 border-b border-slate-200 dark:border-slate-800 pb-2">
         <button
           onClick={() => setActiveTab('quiz')}
           className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'quiz'
-              ? 'bg-indigo-brand text-white shadow-md shadow-indigo-600/20'
-              : 'bg-white text-navy-brand border border-slate-200 hover:bg-slate-50'
+              ? 'bg-indigo-brand text-white shadow-md shadow-blue-600/20'
+              : 'bg-white dark:bg-[#131C31] text-navy-brand dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60'
           }`}
         >
           <Target className="w-4 h-4" />
@@ -212,8 +212,8 @@ export const PracticeCentrePage: React.FC = () => {
           onClick={() => setActiveTab('camera')}
           className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'camera'
-              ? 'bg-berry-brand text-white shadow-md shadow-berry-600/20'
-              : 'bg-white text-navy-brand border border-slate-200 hover:bg-slate-50'
+              ? 'bg-berry-brand text-white shadow-md shadow-sky-600/20'
+              : 'bg-white dark:bg-[#131C31] text-navy-brand dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60'
           }`}
         >
           <Camera className="w-4 h-4" />
@@ -241,7 +241,7 @@ export const PracticeCentrePage: React.FC = () => {
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   practiceMode === m.id
                     ? 'bg-indigo-brand text-white shadow-sm'
-                    : 'bg-white text-navy-brand border border-slate-200 hover:bg-slate-100'
+                    : 'bg-white dark:bg-[#131C31] text-navy-brand dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 {m.label}
@@ -256,45 +256,45 @@ export const PracticeCentrePage: React.FC = () => {
             </div>
           ) : quizFinished && quizResult ? (
             /* Results Screen */
-            <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card text-center max-w-xl mx-auto">
-              <div className="w-16 h-16 mx-auto rounded-2xl bg-indigo-50 text-indigo-brand flex items-center justify-center mb-4">
+            <div className="bg-white dark:bg-[#131C31] rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark text-center max-w-xl mx-auto">
+              <div className="w-16 h-16 mx-auto rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
                 <Award className="w-8 h-8" />
               </div>
-              <h2 className="text-2xl font-black text-navy-brand mb-1">Practice Complete!</h2>
-              <p className="text-xs text-navy-muted mb-6 leading-relaxed">
+              <h2 className="text-2xl font-black text-navy-brand dark:text-white mb-1">Practice Complete!</h2>
+              <p className="text-xs text-navy-muted dark:text-slate-400 mb-6 leading-relaxed">
                 {quizResult.recommendation}
               </p>
 
               <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="p-3.5 rounded-2xl bg-indigo-50 border border-indigo-100">
-                  <span className="text-xs font-bold text-indigo-700 uppercase tracking-wide">Accuracy</span>
-                  <span className="block text-2xl font-black text-indigo-brand mt-1">{quizResult.accuracy_percent}%</span>
+                <div className="p-3.5 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900/60">
+                  <span className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wide">Accuracy</span>
+                  <span className="block text-2xl font-black text-indigo-brand dark:text-blue-400 mt-1">{quizResult.accuracy_percent}%</span>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-100">
-                  <span className="text-xs font-bold text-amber-700 uppercase tracking-wide">XP Earned</span>
-                  <span className="block text-2xl font-black text-amber-700 mt-1">+{quizResult.xp_awarded}</span>
+                <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-100 dark:border-amber-900/60">
+                  <span className="text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wide">XP Earned</span>
+                  <span className="block text-2xl font-black text-amber-700 dark:text-amber-300 mt-1">+{quizResult.xp_awarded}</span>
                 </div>
               </div>
 
               <button
                 onClick={() => startQuizSession(practiceMode)}
-                className="w-full py-3 px-6 rounded-2xl btn-pop-indigo text-xs font-bold cursor-pointer"
+                className="w-full py-3 px-6 rounded-2xl btn-pop-blue text-xs font-bold cursor-pointer"
               >
                 Practice Another Round
               </button>
             </div>
           ) : questions.length > 0 ? (
             /* Question Card */
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card max-w-2xl mx-auto space-y-6">
-              <div className="flex items-center justify-between text-xs text-navy-muted">
-                <span className="font-bold text-berry-brand uppercase tracking-wider">
+            <div className="bg-white dark:bg-[#131C31] rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark max-w-2xl mx-auto space-y-6">
+              <div className="flex items-center justify-between text-xs text-navy-muted dark:text-slate-400">
+                <span className="font-bold text-berry-brand dark:text-sky-400 uppercase tracking-wider">
                   Question {currentQIndex + 1} of {questions.length}
                 </span>
                 <span className="font-semibold">{questions[currentQIndex].category}</span>
               </div>
 
-              <h3 className="text-xl font-black text-navy-brand leading-snug">
+              <h3 className="text-xl font-black text-navy-brand dark:text-white leading-snug">
                 {questions[currentQIndex].question}
               </h3>
 
@@ -302,19 +302,19 @@ export const PracticeCentrePage: React.FC = () => {
               <div className="space-y-2.5">
                 {questions[currentQIndex].options.map((opt, i) => {
                   const isSelected = selectedOpt === opt;
-                  let style = 'bg-white border-2 border-slate-200 hover:border-indigo-300 text-navy-brand';
+                  let style = 'bg-white dark:bg-[#0F172A] border-2 border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-500/50 text-navy-brand dark:text-slate-200';
 
                   if (isAnswerChecked) {
                     const isCorrect = opt.trim().toLowerCase() === questions[currentQIndex].correct_answer.trim().toLowerCase();
                     if (isSelected && isCorrect) {
-                      style = 'bg-emerald-50 border-2 border-emerald-500 text-emerald-900 font-bold';
+                      style = 'bg-emerald-50 dark:bg-emerald-950/60 border-2 border-emerald-500 text-emerald-900 dark:text-emerald-200 font-bold';
                     } else if (isSelected && !isCorrect) {
-                      style = 'bg-rose-50 border-2 border-rose-500 text-rose-900 font-bold';
+                      style = 'bg-rose-50 dark:bg-rose-950/60 border-2 border-rose-500 text-rose-900 dark:text-rose-200 font-bold';
                     } else if (isCorrect) {
-                      style = 'bg-emerald-50/50 border-2 border-emerald-400 text-emerald-800 font-semibold';
+                      style = 'bg-emerald-50/50 dark:bg-emerald-950/40 border-2 border-emerald-400 text-emerald-800 dark:text-emerald-300 font-semibold';
                     }
                   } else if (isSelected) {
-                    style = 'bg-indigo-50 border-2 border-indigo-brand text-indigo-900 font-bold';
+                    style = 'bg-blue-50 dark:bg-blue-950/60 border-2 border-blue-600 dark:border-blue-500 text-blue-900 dark:text-blue-200 font-bold shadow-sm';
                   }
 
                   return (
@@ -326,7 +326,7 @@ export const PracticeCentrePage: React.FC = () => {
                     >
                       <span>{opt}</span>
                       {isAnswerChecked && opt.trim().toLowerCase() === questions[currentQIndex].correct_answer.trim().toLowerCase() && (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                       )}
                     </button>
                   );
@@ -335,9 +335,9 @@ export const PracticeCentrePage: React.FC = () => {
 
               {/* Feedback and Continue */}
               {isAnswerChecked && (
-                <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 text-xs text-navy-brand">
-                  <span className="font-bold text-indigo-900 block mb-1">Explanation:</span>
-                  <p className="leading-relaxed text-slate-700">{questions[currentQIndex].explanation}</p>
+                <div className="p-4 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900 text-xs text-navy-brand dark:text-slate-200">
+                  <span className="font-bold text-blue-900 dark:text-blue-300 block mb-1">Explanation:</span>
+                  <p className="leading-relaxed text-slate-700 dark:text-slate-300">{questions[currentQIndex].explanation}</p>
                 </div>
               )}
 
@@ -347,7 +347,7 @@ export const PracticeCentrePage: React.FC = () => {
                     onClick={handleCheckQuizAnswer}
                     disabled={!selectedOpt}
                     className={`px-6 py-3 rounded-2xl text-xs font-bold transition-all ${
-                      selectedOpt ? 'btn-pop-indigo cursor-pointer' : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                      selectedOpt ? 'btn-pop-blue cursor-pointer' : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed shadow-none'
                     }`}
                   >
                     Check Answer
@@ -355,7 +355,7 @@ export const PracticeCentrePage: React.FC = () => {
                 ) : (
                   <button
                     onClick={handleNextQuizQuestion}
-                    className="px-6 py-3 rounded-2xl btn-pop-indigo text-xs font-bold flex items-center gap-2 cursor-pointer"
+                    className="px-6 py-3 rounded-2xl btn-pop-blue text-xs font-bold flex items-center gap-2 cursor-pointer"
                   >
                     <span>{currentQIndex + 1 === questions.length ? 'Finish Practice' : 'Next Question'}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -364,8 +364,8 @@ export const PracticeCentrePage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="text-center py-12 bg-white rounded-3xl border border-slate-200">
-              <p className="text-sm text-navy-muted">No practice questions available for this filter.</p>
+            <div className="text-center py-12 bg-white dark:bg-[#131C31] rounded-3xl border border-slate-200 dark:border-slate-800">
+              <p className="text-sm text-navy-muted dark:text-slate-400">No practice questions available for this filter.</p>
             </div>
           )}
         </div>
@@ -375,31 +375,31 @@ export const PracticeCentrePage: React.FC = () => {
       {activeTab === 'camera' && (
         <div className="space-y-6">
           {/* Honest Capability & Privacy Transparency Notice */}
-          <div className="p-4 sm:p-5 rounded-3xl bg-amber-50/80 border border-amber-200/80 flex items-start gap-3.5">
-            <Info className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
-            <div className="text-xs text-amber-900 space-y-1 leading-relaxed">
+          <div className="p-4 sm:p-5 rounded-3xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/60 flex items-start gap-3.5">
+            <Info className="w-5 h-5 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+            <div className="text-xs text-amber-900 dark:text-amber-200 space-y-1 leading-relaxed">
               <span className="font-bold text-sm block">
                 Guided Visual Practice (Honest AI Capability Notice)
               </span>
               <p>
                 This feature provides <strong>mirror-mode guided visual self-assessment</strong> comparing your live camera feed side-by-side with verified ISL demonstrations.
               </p>
-              <p className="text-amber-800">
+              <p className="text-amber-800 dark:text-amber-300">
                 <strong>Why we don't display automated scores yet:</strong> Authentic Indian Sign Language incorporates two-handed movement trajectories, 3D spatial references, and non-manual facial grammar. Research-grade automated recognition requires deep multimodal temporal networks currently in pipeline validation. We never display fabricated AI confidence scores.
               </p>
-              <p className="text-amber-900 font-semibold pt-1">
+              <p className="text-amber-900 dark:text-amber-200 font-semibold pt-1">
                 🔒 Privacy Guarantee: Your camera stream is processed strictly locally in your browser. Video is never recorded, uploaded, or transmitted to any server.
               </p>
             </div>
           </div>
 
           {/* Reference Sign Selector */}
-          <div className="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-card flex items-center justify-between flex-wrap gap-3">
+          <div className="bg-white dark:bg-[#131C31] p-4 sm:p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark flex items-center justify-between flex-wrap gap-3">
             <div>
-              <span className="text-xs font-bold text-berry-brand uppercase tracking-wider block">
+              <span className="text-xs font-bold text-berry-brand dark:text-sky-400 uppercase tracking-wider block">
                 Practice Reference
               </span>
-              <span className="text-base font-bold text-navy-brand">
+              <span className="text-base font-bold text-navy-brand dark:text-white">
                 {selectedReferenceSign?.vocabulary || "Select a verified sign"}
               </span>
             </div>
@@ -410,7 +410,7 @@ export const PracticeCentrePage: React.FC = () => {
                 const found = availableSigns.find((s) => s.id === parseInt(e.target.value));
                 if (found) setSelectedReferenceSign(found);
               }}
-              className="bg-cloud border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-navy-brand outline-none"
+              className="bg-cloud dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-navy-brand dark:text-slate-200 outline-none"
             >
               {availableSigns.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -425,7 +425,7 @@ export const PracticeCentrePage: React.FC = () => {
             {/* Left: Verified Reference Sign */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">
                   Verified ISL Demonstration
                 </span>
                 {selectedReferenceSign && (
@@ -440,7 +440,7 @@ export const PracticeCentrePage: React.FC = () => {
                   showDetails={true}
                 />
               ) : (
-                <div className="h-64 bg-slate-100 rounded-2xl flex items-center justify-center text-xs text-navy-muted">
+                <div className="h-64 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-xs text-navy-muted dark:text-slate-400">
                   No sign selected
                 </div>
               )}
@@ -449,15 +449,15 @@ export const PracticeCentrePage: React.FC = () => {
             {/* Right: Learner Camera Feed & Guidelines Frame */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-berry-700">
+                <span className="text-xs font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400">
                   Your Live Camera Mirror
                 </span>
-                <span className="text-xs font-medium text-navy-muted">
+                <span className="text-xs font-medium text-navy-muted dark:text-slate-400">
                   {cameraPermission === 'granted' ? 'Active' : 'Camera Inactive'}
                 </span>
               </div>
 
-              <div className="relative w-full aspect-video bg-navy-brand rounded-2xl overflow-hidden border border-slate-300 flex items-center justify-center shadow-card">
+              <div className="relative w-full aspect-video bg-navy-brand dark:bg-slate-950 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-800 flex items-center justify-center shadow-card dark:shadow-card-dark">
                 {/* Video Element */}
                 <video
                   ref={videoRef}
@@ -472,11 +472,11 @@ export const PracticeCentrePage: React.FC = () => {
                 {/* Hand Positioning Guideline Overlay Frame */}
                 {cameraPermission === 'granted' && (
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6">
-                    <div className="w-4/5 h-4/5 border-2 border-dashed border-coral-brand/70 rounded-3xl flex flex-col items-center justify-between p-3">
-                      <span className="px-2.5 py-1 rounded-full bg-navy-brand/70 text-[10px] font-bold text-white backdrop-blur">
+                    <div className="w-4/5 h-4/5 border-2 border-dashed border-sky-400/70 rounded-3xl flex flex-col items-center justify-between p-3">
+                      <span className="px-2.5 py-1 rounded-full bg-slate-900/80 text-[10px] font-bold text-white backdrop-blur">
                         Align hands & chest within frame
                       </span>
-                      <span className="text-[10px] text-coral-100 font-semibold bg-navy-brand/50 px-2 py-0.5 rounded">
+                      <span className="text-[10px] text-sky-200 font-semibold bg-slate-900/60 px-2 py-0.5 rounded">
                         Maintain eye contact
                       </span>
                     </div>
@@ -487,7 +487,7 @@ export const PracticeCentrePage: React.FC = () => {
                 {cameraPermission !== 'granted' && (
                   <div className="p-6 text-center text-white space-y-3 max-w-sm">
                     <div className="w-12 h-12 mx-auto rounded-2xl bg-white/10 flex items-center justify-center">
-                      <Camera className="w-6 h-6 text-coral-brand" />
+                      <Camera className="w-6 h-6 text-sky-400" />
                     </div>
                     <h4 className="text-base font-bold">Start Guided Camera Practice</h4>
                     <p className="text-xs text-slate-300 leading-relaxed">
@@ -502,7 +502,7 @@ export const PracticeCentrePage: React.FC = () => {
 
                     <button
                       onClick={startCamera}
-                      className="px-5 py-2.5 rounded-xl btn-pop-indigo text-xs font-bold inline-flex items-center gap-2 cursor-pointer"
+                      className="px-5 py-2.5 rounded-xl btn-pop-blue text-xs font-bold inline-flex items-center gap-2 cursor-pointer"
                     >
                       <Camera className="w-4 h-4" />
                       <span>Allow Camera & Start</span>
@@ -512,20 +512,20 @@ export const PracticeCentrePage: React.FC = () => {
               </div>
 
               {/* Camera Controls & Self-Assessment */}
-              <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-card flex items-center justify-between flex-wrap gap-3">
+              <div className="bg-white dark:bg-[#131C31] p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-card dark:shadow-card-dark flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-2">
                   {cameraPermission === 'granted' ? (
                     <button
                       onClick={stopCamera}
-                      className="px-3.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
                     >
-                      <CameraOff className="w-3.5 h-3.5 text-slate-500" />
+                      <CameraOff className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>Stop Camera</span>
                     </button>
                   ) : (
                     <button
                       onClick={startCamera}
-                      className="px-3.5 py-1.5 rounded-xl btn-pop-indigo text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-xl btn-pop-blue text-xs font-bold flex items-center gap-1.5 cursor-pointer"
                     >
                       <Camera className="w-3.5 h-3.5" />
                       <span>Start Camera</span>
@@ -535,13 +535,13 @@ export const PracticeCentrePage: React.FC = () => {
 
                 {/* Self-Assessment controls */}
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-navy-muted">Self-Check:</span>
+                  <span className="text-xs font-semibold text-navy-muted dark:text-slate-400">Self-Check:</span>
                   <button
                     onClick={() => setSelfAssessment('match')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                       selfAssessment === 'match'
-                        ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                        : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                     }`}
                   >
                     ✓ Matches Well
@@ -550,8 +550,8 @@ export const PracticeCentrePage: React.FC = () => {
                     onClick={() => setSelfAssessment('adjust')}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                       selfAssessment === 'adjust'
-                        ? 'bg-amber-50 border-amber-300 text-amber-800'
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        ? 'bg-amber-50 dark:bg-amber-950/50 border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300'
+                        : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                     }`}
                   >
                     Adjust Form

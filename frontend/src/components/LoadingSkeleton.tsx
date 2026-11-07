@@ -5,7 +5,7 @@ export const SkeletonBox: React.FC<{ className?: string }> = ({ className = 'h-4
 );
 
 export const SkeletonCard: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div className={`bg-white rounded-3xl border border-slate-200/80 p-6 shadow-card ${className}`}>
+  <div className={`bg-white dark:bg-[#131C31] rounded-3xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-card dark:shadow-card-dark ${className}`}>
     <div className="flex items-center gap-3 mb-4">
       <div className="w-10 h-10 rounded-2xl skeleton-shimmer flex-shrink-0" />
       <div className="space-y-2 flex-1">
@@ -23,7 +23,7 @@ export const SkeletonCard: React.FC<{ className?: string }> = ({ className = '' 
 export const SkeletonDashboard: React.FC = () => (
   <div className="space-y-8 animate-pulse">
     {/* Hero Banner Skeleton */}
-    <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6">
+    <div className="bg-white dark:bg-[#131C31] rounded-3xl border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6">
       <div className="w-16 h-16 rounded-2xl skeleton-shimmer flex-shrink-0" />
       <div className="space-y-3 flex-1 w-full">
         <SkeletonBox className="h-6 w-2/3 md:w-1/3" />
@@ -35,7 +35,7 @@ export const SkeletonDashboard: React.FC = () => (
     {/* Metric Cards Skeleton */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {[1, 2, 3, 4].map((i) => (
-        <div key={i} className="bg-white rounded-2xl border border-slate-200/80 p-5 space-y-3">
+        <div key={i} className="bg-white dark:bg-[#131C31] rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 space-y-3">
           <div className="flex justify-between items-center">
             <SkeletonBox className="h-4 w-24" />
             <div className="w-8 h-8 rounded-xl skeleton-shimmer" />
@@ -59,7 +59,7 @@ export const SkeletonDashboard: React.FC = () => (
 );
 
 export const SkeletonSignCard: React.FC = () => (
-  <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-card space-y-4">
+  <div className="bg-white dark:bg-[#131C31] rounded-3xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-card dark:shadow-card-dark space-y-4">
     <div className="w-full h-36 rounded-2xl skeleton-shimmer" />
     <div className="space-y-2">
       <SkeletonBox className="h-5 w-3/4" />

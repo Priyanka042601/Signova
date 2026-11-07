@@ -136,6 +136,8 @@ export interface RevisionAttemptResponse {
   new_mastery_score: number;
   next_review_at: string;
   xp_awarded: number;
+  new_xp_total?: number;
+  current_streak?: number;
 }
 
 export interface PracticeQuestion {
@@ -158,6 +160,7 @@ export interface PracticeAttemptResponse {
   accuracy_percent: number;
   xp_awarded: number;
   new_xp_total: number;
+  current_streak?: number;
   recommendation: string;
 }
 
