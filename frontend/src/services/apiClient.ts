@@ -14,7 +14,8 @@ import {
   UserAuthResponse
 } from '../types/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api').trim();
+const API_BASE_URL = rawBaseUrl.endsWith('/api') ? rawBaseUrl : `${rawBaseUrl.replace(/\/+$/, '')}/api`;
 
 // Dynamic Clerk authentication token provider
 let authTokenGetter: (() => Promise<string | null>) | null = null;

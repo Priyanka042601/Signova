@@ -12,11 +12,11 @@ services:
         value: production
       - key: DATABASE_URL
         value: sqlite:///./signova.db
+      - key: CORS_ORIGINS
+        value: "*"
       - key: CLERK_SECRET_KEY
         sync: false
       - key: CLERK_PUBLISHABLE_KEY
-        sync: false
-      - key: CORS_ORIGINS
         sync: false
 
   # Frontend Static Site
