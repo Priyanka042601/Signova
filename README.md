@@ -309,18 +309,6 @@ Signova adheres to strict linguistic guidelines for Indian Sign Language authent
 
 ---
 
-## 9. Contributing
-
-We welcome contributions from Deaf educators, ISL certified interpreters, linguists, and developers!
-
-1. Fork the Project.
-2. Create your Feature Branch (`git checkout -b feature/AmazingSignovaFeature`).
-3. Commit your Changes (`git commit -m 'feat: Add new ISL verified category'`).
-4. Push to the Branch (`git push origin feature/AmazingSignovaFeature`).
-5. Open a Pull Request.
-
----
-
-## 10. License
+## 9. License
 
 Distributed under the **Educational Open Standard & Cultural Heritage Fair Use** license. Dedicated to advancing Indian Sign Language accessibility and inclusion.
